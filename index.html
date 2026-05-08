@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StackTrim AI Spend Audit</title>
+    <meta
+      name="description"
+      content="A free AI spend audit for startup teams. Find plan waste, tool overlap, and Credex credit opportunities in minutes."
+    />
+    <meta property="og:title" content="StackTrim AI Spend Audit" />
+    <meta property="og:description" content="Find AI tool overspend and share a clean savings report." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="StackTrim home">
+        <span class="brand-mark" aria-hidden="true">ST</span>
+        <span>StackTrim</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="#audit">Audit</a>
+        <a href="#report">Report</a>
+        <a href="#sources">Sources</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="audit">
+        <div class="hero-copy">
+          <p class="eyebrow">Free AI spend audit</p>
+          <h1>Stop paying retail for an AI stack nobody has checked.</h1>
+          <p>
+            Enter your tools, seats, spend, team size, and primary use case. StackTrim returns an
+            instant audit with plan-fit recommendations, annualized savings, and a public report link
+            safe to share.
+          </p>
+        </div>
+        <div class="hero-metrics" aria-label="Audit highlights">
+          <div>
+            <span id="heroMonthly">$0</span>
+            <small>monthly savings found</small>
+          </div>
+          <div>
+            <span id="heroAnnual">$0</span>
+            <small>annual savings</small>
+          </div>
+          <div>
+            <span id="heroTools">0</span>
+            <small>tools audited</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Audit workspace">
+        <aside class="panel controls" aria-label="Company inputs">
+          <h2>Company</h2>
+          <label>
+            Company name
+            <input id="companyName" autocomplete="organization" placeholder="Acme Labs" />
+          </label>
+          <div class="field-row">
+            <label>
+              Team size
+              <input id="teamSize" type="number" min="1" value="12" />
+            </label>
+            <label>
+              Primary use case
+              <select id="primaryUse">
+                <option value="coding">Coding</option>
+                <option value="writing">Writing</option>
+                <option value="data">Data</option>
+                <option value="research">Research</option>
+                <option value="mixed">Mixed</option>
+              </select>
+            </label>
+          </div>
+          <button id="addTool" class="secondary" type="button">Add another tool</button>
+          <button id="runAudit" type="button">Run audit</button>
+        </aside>
+
+        <section class="tool-editor" aria-label="Tool spend inputs">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Spend input</p>
+              <h2>What are you paying for?</h2>
+            </div>
+            <button id="loadSample" class="ghost" type="button">Load sample</button>
+          </div>
+          <div id="toolRows" class="tool-rows"></div>
+        </section>
+      </section>
+
+      <section class="report" id="report" aria-live="polite">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Audit result</p>
+            <h2>Your savings report</h2>
+          </div>
+          <div class="report-actions">
+            <button id="shareReport" class="secondary" type="button">Copy report link</button>
+            <button id="printReport" class="ghost" type="button">Print</button>
+          </div>
+        </div>
+
+        <div class="summary-grid">
+          <div class="metric">
+            <span id="monthlySavings">$0</span>
+            <small>Potential monthly savings</small>
+          </div>
+          <div class="metric">
+            <span id="annualSavings">$0</span>
+            <small>Potential annual savings</small>
+          </div>
+          <div class="metric">
+            <span id="credexFlag">No</span>
+            <small>Credex consultation fit</small>
+          </div>
+        </div>
+
+        <p id="aiSummary" class="ai-summary">
+          Run an audit to generate a personalized summary. If the AI service is unavailable, this
+          will use a deterministic fallback.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tool</th>
+                <th>Current</th>
+                <th>Recommended action</th>
+                <th>Savings</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody"></tbody>
+          </table>
+        </div>
+
+        <form id="leadForm" class="lead-form">
+          <div>
+            <p class="eyebrow">Save report</p>
+            <h3>Get the audit emailed and track new optimization ideas.</h3>
+          </div>
+          <label>
+            Work email
+            <input id="leadEmail" type="email" autocomplete="email" placeholder="you@company.com" required />
+          </label>
+          <label>
+            Role
+            <input id="leadRole" autocomplete="organization-title" placeholder="Founder, CTO, Eng Manager" />
+          </label>
+          <button type="submit">Send audit</button>
+          <p id="leadStatus" role="status"></p>
+        </form>
+      </section>
+
+      <section class="sources" id="sources">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Pricing data</p>
+            <h2>Every number links back to an official source.</h2>
+          </div>
+          <span id="pricingDate"></span>
+        </div>
+        <div id="sourceList" class="source-list"></div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Built for Credex WebDev 2026 Round 1.</span>
+      <span>No login required. Public report links strip email and company name.</span>
+    </footer>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
