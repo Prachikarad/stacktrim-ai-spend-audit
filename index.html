@@ -17,7 +17,7 @@
   <body>
     <header class="topbar">
       <a class="brand" href="./" aria-label="StackTrim home">
-        <span class="brand-mark" aria-hidden="true">ST</span>
+        <span class="brand-mark" aria-hidden="true">S</span>
         <span>StackTrim</span>
       </a>
       <nav aria-label="Primary">
@@ -30,33 +30,96 @@
     <main>
       <section class="hero" id="audit">
         <div class="hero-copy">
-          <p class="eyebrow">Free AI spend audit</p>
-          <h1>Stop paying retail for an AI stack nobody has checked.</h1>
+          <p class="eyebrow">Credex-ready AI spend audit</p>
+          <h1>Find the AI spend your startup should not be paying.</h1>
           <p>
-            Enter your tools, seats, spend, team size, and primary use case. StackTrim returns an
-            instant audit with plan-fit recommendations, annualized savings, and a public report link
-            safe to share.
+            StackTrim turns a messy stack of Cursor, Copilot, Claude, ChatGPT, Gemini, Windsurf,
+            and API bills into a finance-readable savings report in minutes.
           </p>
+          <div class="hero-actions">
+            <a class="button-link" href="#workspace">Start audit</a>
+            <button id="heroSample" class="ghost" type="button">Show sample report</button>
+          </div>
+          <div class="proof-strip" aria-label="Product proof points">
+            <span>No login</span>
+            <span>Official pricing sources</span>
+            <span>Shareable redacted reports</span>
+          </div>
         </div>
-        <div class="hero-metrics" aria-label="Audit highlights">
-          <div>
-            <span id="heroMonthly">$0</span>
-            <small>monthly savings found</small>
+        <div class="hero-visual" aria-label="Audit highlights">
+          <div class="audit-window">
+            <div class="window-bar">
+              <span></span>
+              <span></span>
+              <span></span>
+              <strong>stacktrim.audit</strong>
+            </div>
+            <div class="audit-window-body">
+              <div class="hero-card-top">
+                <span class="live-dot" aria-hidden="true"></span>
+                <span>Live audit preview</span>
+              </div>
+              <div class="savings-ring">
+                <span id="heroMonthly">$0</span>
+                <small>monthly savings found</small>
+              </div>
+              <div class="hero-stat-row">
+                <div>
+                  <span id="heroAnnual">$0</span>
+                  <small>annualized</small>
+                </div>
+                <div>
+                  <span id="heroTools">0</span>
+                  <small>tools checked</small>
+                </div>
+              </div>
+              <div class="spend-stack" aria-label="Detected spend stack">
+                <div>
+                  <span>Cursor Teams</span>
+                  <strong>$160</strong>
+                </div>
+                <div>
+                  <span>Copilot Business</span>
+                  <strong>$171</strong>
+                </div>
+                <div>
+                  <span>OpenAI API</span>
+                  <strong>$1.2k</strong>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <span id="heroAnnual">$0</span>
-            <small>annual savings</small>
+          <div class="floating-note top">
+            <span>Duplicate seats</span>
+            <strong>-35%</strong>
           </div>
-          <div>
-            <span id="heroTools">0</span>
-            <small>tools audited</small>
+          <div class="floating-note bottom">
+            <span>Credit opportunity</span>
+            <strong>Credex fit</strong>
           </div>
         </div>
       </section>
 
-      <section class="workspace" aria-label="Audit workspace">
+      <section class="signal-strip" aria-label="Audit signal examples">
+        <div>
+          <strong>Plan fit</strong>
+          <span>Small team on enterprise-style pricing? Flagged with math.</span>
+        </div>
+        <div>
+          <strong>Tool overlap</strong>
+          <span>Multiple coding assistants on the same seats? Consolidation surfaced.</span>
+        </div>
+        <div>
+          <strong>Credit leverage</strong>
+          <span>High API spend becomes a Credex consultation opportunity.</span>
+        </div>
+      </section>
+
+      <section class="workspace" id="workspace" aria-label="Audit workspace">
         <aside class="panel controls" aria-label="Company inputs">
-          <h2>Company</h2>
+          <p class="eyebrow">Step 01</p>
+          <h2>Company context</h2>
+          <p class="panel-copy">Enough context to judge plan fit without asking for private billing access.</p>
           <label>
             Company name
             <input id="companyName" autocomplete="organization" placeholder="Acme Labs" />
@@ -84,8 +147,9 @@
         <section class="tool-editor" aria-label="Tool spend inputs">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">Spend input</p>
-              <h2>What are you paying for?</h2>
+              <p class="eyebrow">Step 02</p>
+              <h2>Map the AI stack</h2>
+              <p>Add subscriptions and API bills. Custom spend overrides listed plan prices.</p>
             </div>
             <button id="loadSample" class="ghost" type="button">Load sample</button>
           </div>
@@ -96,8 +160,8 @@
       <section class="report" id="report" aria-live="polite">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Audit result</p>
-            <h2>Your savings report</h2>
+            <p class="eyebrow">Board-ready output</p>
+            <h2>Your AI spend memo</h2>
           </div>
           <div class="report-actions">
             <button id="shareReport" class="secondary" type="button">Copy report link</button>
@@ -125,6 +189,8 @@
           will use a deterministic fallback.
         </p>
 
+        <div id="insightCards" class="insight-cards" aria-label="Top audit insights"></div>
+
         <div class="table-wrap">
           <table>
             <thead>
@@ -142,8 +208,8 @@
 
         <form id="leadForm" class="lead-form">
           <div>
-            <p class="eyebrow">Save report</p>
-            <h3>Get the audit emailed and track new optimization ideas.</h3>
+            <p class="eyebrow">Credex handoff</p>
+            <h3>Capture this report and unlock follow-up savings.</h3>
           </div>
           <label>
             Work email

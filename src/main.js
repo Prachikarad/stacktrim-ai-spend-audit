@@ -87,7 +87,7 @@ function renderToolRows() {
             Actual monthly spend
             <input data-field="monthlySpend" type="number" min="0" placeholder="optional" value="${row.monthlySpend ?? ''}" />
           </label>
-          <button class="icon-button" data-remove="${row.id}" type="button" aria-label="Remove tool">×</button>
+          <button class="icon-button" data-remove="${row.id}" type="button" aria-label="Remove tool">x</button>
         </article>
       `
     )
@@ -142,6 +142,26 @@ function renderAudit(audit) {
   $('#heroMonthly').textContent = money(audit.monthlySavings);
   $('#heroAnnual').textContent = money(audit.annualSavings);
   $('#heroTools').textContent = String(audit.results.length);
+  $('#insightCards').innerHTML = [...audit.results]
+    .sort((a, b) => b.savings - a.savings)
+    .slice(0, 3)
+    .map(
+      (result, index) => `
+        <article class="insight-card ${result.savings > 0 ? 'has-savings' : ''}">
+          <div class="insight-rank">0${index + 1}</div>
+          <div>
+            <span class="tag">${result.savings > 0 ? 'Savings lever' : 'Looks healthy'}</span>
+            <h3>${result.toolName}</h3>
+            <p>${result.action}</p>
+          </div>
+          <div class="insight-money">
+            <strong>${money(result.savings)}</strong>
+            <small>per month</small>
+          </div>
+        </article>
+      `
+    )
+    .join('');
 
   $('#resultsBody').innerHTML =
     audit.results
@@ -150,8 +170,8 @@ function renderAudit(audit) {
           <tr>
             <td><strong>${result.toolName}</strong><small>${result.planName}, ${result.seats} seats</small></td>
             <td>${money(result.currentSpend)}</td>
-            <td>${result.action}</td>
-            <td><strong>${money(result.savings)}</strong><small>${money(result.annualSavings)} / yr</small></td>
+            <td><span class="tag">${result.savings > 0 ? 'Optimize' : 'Keep'}</span><br />${result.action}</td>
+            <td class="savings-cell"><strong>${money(result.savings)}</strong><small>${money(result.annualSavings)} / yr</small></td>
             <td>${result.reason} <a href="${result.sourceUrl}" target="_blank" rel="noreferrer">Source</a></td>
           </tr>
         `
@@ -242,6 +262,12 @@ document.addEventListener('click', (event) => {
     Object.assign(state, sampleState());
     syncForm();
     runAudit();
+  }
+  if (event.target.id === 'heroSample') {
+    Object.assign(state, sampleState());
+    syncForm();
+    runAudit();
+    document.querySelector('#report').scrollIntoView({ behavior: 'smooth' });
   }
   if (event.target.id === 'runAudit') runAudit();
   if (event.target.id === 'shareReport') copyReportLink();
