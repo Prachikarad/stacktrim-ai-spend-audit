@@ -1,22 +1,22 @@
 :root {
   color-scheme: dark;
-  --ink: #ffffff;
-  --muted: #a0a0a0;
-  --soft: #1a1a2e;
-  --line: #2a2a4e;
-  --paper: #0f0f23;
-  --panel: #1a1a2e;
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
-  --accent: #06b6d4;
-  --accent-dark: #0891b2;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --error: #ef4444;
-  --glass: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --shadow: 0 28px 90px rgba(0, 0, 0, 0.5);
-  --glow-subtle: 0 0 20px rgba(37, 99, 235, 0.15);
+  --ink: #f7fafc;
+  --muted: #94a3b8;
+  --soft: #101827;
+  --line: #18242f;
+  --paper: #090d16;
+  --panel: #0d1220;
+  --primary: #60a5fa;
+  --primary-dark: #3b82f6;
+  --accent: #22d3ee;
+  --accent-dark: #06b6d4;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --error: #fb7185;
+  --glass: rgba(15, 23, 42, 0.92);
+  --glass-border: rgba(148, 163, 184, 0.12);
+  --shadow: 0 30px 90px rgba(0, 0, 0, 0.75);
+  --glow-subtle: 0 0 18px rgba(59, 130, 246, 0.12);
   font-family:
     'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -32,9 +32,9 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 30% 20%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 70% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 50%),
-    linear-gradient(135deg, #0a0a14 0%, #0f0f23 50%, #0a0a14 100%);
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 42%),
+    radial-gradient(circle at 78% 75%, rgba(14, 165, 233, 0.06) 0%, transparent 42%),
+    linear-gradient(180deg, #05070d 0%, #0b1220 100%);
   color: var(--ink);
   min-height: 100vh;
   position: relative;
@@ -48,14 +48,14 @@ body::before {
   width: 100%;
   height: 100%;
   background:
-    radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.03) 0%, transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.03) 0%, transparent 40%);
+    radial-gradient(circle at 18% 25%, rgba(59, 130, 246, 0.04) 0%, transparent 42%),
+    radial-gradient(circle at 82% 70%, rgba(14, 165, 233, 0.04) 0%, transparent 42%);
   pointer-events: none;
   z-index: -1;
 }
 
 a {
-  color: var(--forest-2);
+  color: var(--accent);
 }
 
 button,
@@ -228,10 +228,10 @@ main {
   inset: 34px clamp(18px, 4vw, 58px) auto auto;
   width: min(44vw, 540px);
   height: min(44vw, 540px);
-  border: 1px solid rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(37, 99, 235, 0.08);
   border-radius: 50%;
   content: "";
-  opacity: 0.6;
+  opacity: 0.45;
   pointer-events: none;
 }
 
@@ -263,7 +263,7 @@ h1 {
   font-size: clamp(42px, 5.8vw, 76px);
   line-height: 1.1;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 40%, #f1f5f9 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -286,7 +286,7 @@ h3 {
 .section-heading p,
 .panel-copy {
   max-width: 670px;
-  color: #3d4740;
+  color: #cbd5e1;
   font-size: 17px;
   line-height: 1.62;
 }
@@ -305,10 +305,10 @@ h3 {
 }
 
 .proof-strip span {
-  border: 1px solid rgba(6, 72, 58, 0.16);
+  border: 1px solid rgba(148, 163, 184, 0.14);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.68);
-  color: #34443b;
+  background: rgba(15, 23, 42, 0.92);
+  color: #cbd5e1;
   padding: 8px 12px;
   font-size: 13px;
   font-weight: 800;
@@ -317,24 +317,27 @@ h3 {
 .hero-visual {
   position: relative;
   z-index: 1;
+  background: linear-gradient(180deg, rgba(5, 9, 20, 0.85), rgba(10, 15, 30, 0.95));
+  border-radius: 24px;
+  padding: 16px;
 }
 
 .audit-window {
   position: relative;
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  background: var(--glass);
-  box-shadow: var(--shadow);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(6, 10, 19, 0.98), rgba(8, 14, 26, 0.98));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65);
   overflow: hidden;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
 }
 
 .window-bar {
   display: flex;
   align-items: center;
   gap: 7px;
-  border-bottom: 1px solid var(--glass-border);
-  background: rgba(37, 99, 235, 0.05);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.06);
+  background: rgba(15, 23, 40, 0.95);
   padding: 12px 14px;
 }
 
@@ -386,13 +389,13 @@ h3 {
   min-height: 214px;
   margin: 18px 0;
   place-items: center;
-  border-radius: 12px;
+  border-radius: 16px;
   background:
-    radial-gradient(circle, rgba(255, 255, 255, 0.1) 0 48%, transparent 49%),
-    conic-gradient(var(--success) 0% 75%, rgba(26, 26, 46, 0.5) 75% 100%);
+    radial-gradient(circle, rgba(255, 255, 255, 0.03) 0 48%, transparent 49%),
+    conic-gradient(var(--success) 0% 75%, rgba(8, 14, 26, 0.92) 75% 100%);
   text-align: center;
   position: relative;
-  box-shadow: inset 0 0 30px rgba(16, 185, 129, 0.2);
+  box-shadow: inset 0 0 24px rgba(16, 185, 129, 0.12);
 }
 
 .savings-ring::before {
@@ -527,7 +530,7 @@ h3 {
 }
 
 .floating-note strong {
-  color: var(--forest);
+  color: var(--accent);
   font-size: 20px;
 }
 
@@ -585,12 +588,12 @@ small {
 .tool-editor,
 .report,
 .sources {
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  background: var(--glass);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 16px;
+  background: rgba(9, 14, 28, 0.95);
   padding: clamp(18px, 3vw, 30px);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(20px);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(24px);
 }
 
 .controls {
@@ -603,9 +606,9 @@ small {
 label {
   display: grid;
   gap: 7px;
-  color: #344039;
+  color: var(--muted);
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 input,
@@ -634,15 +637,18 @@ select:focus {
 }
 
 .metric {
-  background:
-    linear-gradient(180deg, rgba(223, 246, 234, 0.5), rgba(255, 255, 255, 0)),
-    #fff;
   min-height: 128px;
+  padding: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 14px;
+  background: rgba(15, 22, 38, 0.9);
+  color: var(--ink);
 }
 
 .metric:first-child {
-  background: var(--forest);
+  background: linear-gradient(180deg, rgba(37, 99, 235, 0.18), rgba(37, 99, 235, 0.08));
   color: #fff;
+  border-color: rgba(37, 99, 235, 0.3);
 }
 
 .metric:first-child span,
@@ -672,12 +678,12 @@ select:focus {
   grid-template-columns: 1.15fr 1.4fr 0.55fr 0.85fr 44px;
   gap: 12px;
   align-items: end;
-  border: 1px solid var(--glass-border);
-  border-radius: 8px;
-  background: rgba(26, 26, 46, 0.3);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+  border-radius: 14px;
+  background: rgba(13, 20, 35, 0.95);
   padding: 14px;
   transition: all 200ms ease;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
 }
 
 .tool-row:hover {
@@ -704,9 +710,9 @@ select:focus {
 }
 
 .report {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.92)),
-    #fff;
+  background: rgba(10, 15, 28, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  backdrop-filter: blur(24px);
 }
 
 .report-actions {
@@ -761,7 +767,7 @@ select:focus {
 }
 
 .insight-rank {
-  color: rgba(4, 63, 51, 0.25);
+  color: rgba(255, 255, 255, 0.16);
   font-size: 44px;
   font-weight: 950;
   line-height: 1;
@@ -774,23 +780,23 @@ select:focus {
 
 .insight-card p {
   margin: 0;
-  color: #3f4b44;
+  color: var(--muted);
   line-height: 1.5;
 }
 
 .insight-money strong {
   display: block;
-  color: var(--forest);
+  color: var(--success);
   font-size: 34px;
   line-height: 1;
 }
 
 .table-wrap {
   overflow-x: auto;
-  border: 1px solid var(--glass-border);
-  border-radius: 8px;
-  background: var(--glass);
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  border-radius: 14px;
+  background: rgba(10, 15, 26, 0.95);
+  backdrop-filter: blur(16px);
 }
 
 table {
@@ -832,15 +838,15 @@ tr:last-child td {
   display: inline-flex;
   align-items: center;
   border-radius: 999px;
-  background: var(--mint);
-  color: var(--forest);
+  background: rgba(37, 99, 235, 0.12);
+  color: #bfdbfe;
   padding: 4px 9px;
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .savings-cell {
-  color: var(--forest);
+  color: var(--success);
 }
 
 .lead-form {
