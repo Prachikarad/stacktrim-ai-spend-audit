@@ -187,6 +187,12 @@ async function serveStatic(req, res, pathname) {
   // Remove leading slash to ensure relative path joining works on all platforms
   let normalized = normalize(cleanPath).replace(/^(\.\.[/\\])+/, '').replace(/^[/\\]/, '');
   const filePath = join(root, normalized);
+  
+  // Debug logging
+  if (process.env.DEBUG) {
+    console.log(`[DEBUG] pathname: ${pathname}, normalized: ${normalized}, filePath: ${filePath}, exists: ${filePath.startsWith(root)}`);
+  }
+  
   if (!filePath.startsWith(root)) {
     res.writeHead(403);
     res.end('Forbidden');
@@ -200,7 +206,7 @@ async function serveStatic(req, res, pathname) {
       'Cache-Control': 'no-store'
     });
     res.end(data);
-  } catch {
+  } catch (err) {
     // Only serve index.html for HTML navigation routes (no file extension)
     if (!extname(normalized)) {
       const fallback = await readFile(join(root, 'index.html'));
@@ -208,7 +214,7 @@ async function serveStatic(req, res, pathname) {
       res.end(fallback);
     } else {
       res.writeHead(404, { 'Content-Type': 'text/plain' });
-      res.end('Not found');
+      res.end(`Not found: ${filePath}`);
     }
   }
 }
