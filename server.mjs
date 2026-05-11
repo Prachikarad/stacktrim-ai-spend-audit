@@ -5,6 +5,8 @@ import { fileURLToPath } from 'node:url';
 import { fallbackSummary } from './src/audit-engine.js';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
+await loadEnvFile(join(root, '.env'));
+
 const port = Number(process.env.PORT || 5173);
 const rateLimit = new Map();
 
@@ -19,6 +21,23 @@ const contentTypes = {
 function json(res, status, payload) {
   res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' });
   res.end(JSON.stringify(payload));
+}
+
+async function loadEnvFile(filePath) {
+  try {
+    const env = await readFile(filePath, 'utf8');
+    for (const line of env.split(/\r?\n/)) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+      const separator = trimmed.indexOf('=');
+      if (separator === -1) continue;
+      const key = trimmed.slice(0, separator).trim();
+      const value = trimmed.slice(separator + 1).trim().replace(/^["']|["']$/g, '');
+      if (key && process.env[key] === undefined) process.env[key] = value;
+    }
+  } catch {
+    // .env is optional in deployed environments.
+  }
 }
 
 async function readJson(req) {
@@ -81,6 +100,51 @@ async function sendLeadEmail(lead) {
   return response.ok;
 }
 
+async function storeLeadInSupabase(lead) {
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseKey) return false;
+
+  const response = await fetch(`${supabaseUrl.replace(/\/$/, '')}/rest/v1/leads`, {
+    method: 'POST',
+    headers: {
+      apikey: supabaseKey,
+      authorization: `Bearer ${supabaseKey}`,
+      'content-type': 'application/json',
+      prefer: 'return=minimal'
+    },
+    body: JSON.stringify({
+      email: lead.email,
+      role: lead.role || null,
+      company_name: lead.companyName || null,
+      team_size: Number(lead.teamSize) || null,
+      monthly_savings: Number(lead.audit?.monthlySavings) || 0,
+      annual_savings: Number(lead.audit?.annualSavings) || 0,
+      credex_fit: Boolean(lead.audit?.credexFit),
+      audit: lead.audit || {}
+    })
+  });
+
+  if (!response.ok) {
+    const message = await response.text();
+    throw new Error(`Supabase insert failed: ${response.status} ${message}`);
+  }
+  return true;
+}
+
+async function storeLeadLocally(lead) {
+  await mkdir(join(root, 'data'), { recursive: true });
+  const file = join(root, 'data', 'leads.json');
+  let leads = [];
+  try {
+    leads = JSON.parse(await readFile(file, 'utf8'));
+  } catch {
+    leads = [];
+  }
+  leads.push({ ...lead, capturedAt: new Date().toISOString() });
+  await writeFile(file, JSON.stringify(leads, null, 2));
+}
+
 async function handleApi(req, res, pathname) {
   const ip = req.socket.remoteAddress || 'unknown';
   if (isLimited(ip)) return json(res, 429, { error: 'Rate limit exceeded' });
@@ -97,18 +161,19 @@ async function handleApi(req, res, pathname) {
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email || '')) {
         return json(res, 400, { error: 'Valid email required' });
       }
-      await mkdir(join(root, 'data'), { recursive: true });
-      const file = join(root, 'data', 'leads.json');
-      let leads = [];
+      let storage = 'supabase';
       try {
-        leads = JSON.parse(await readFile(file, 'utf8'));
+        const stored = await storeLeadInSupabase(lead);
+        if (!stored) {
+          await storeLeadLocally(lead);
+          storage = 'local';
+        }
       } catch {
-        leads = [];
+        await storeLeadLocally(lead);
+        storage = 'local';
       }
-      leads.push({ ...lead, capturedAt: new Date().toISOString() });
-      await writeFile(file, JSON.stringify(leads, null, 2));
       const emailed = await sendLeadEmail(lead);
-      return json(res, 200, { ok: true, emailed });
+      return json(res, 200, { ok: true, emailed, storage });
     }
   } catch (error) {
     return json(res, 500, { error: error.message });

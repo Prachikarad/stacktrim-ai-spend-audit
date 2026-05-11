@@ -87,7 +87,7 @@ function renderToolRows() {
             Actual monthly spend
             <input data-field="monthlySpend" type="number" min="0" placeholder="optional" value="${row.monthlySpend ?? ''}" />
           </label>
-          <button class="icon-button" data-remove="${row.id}" type="button" aria-label="Remove tool">x</button>
+          <button class="icon-button" data-remove="${row.id}" type="button" aria-label="Remove tool">×</button>
         </article>
       `
     )
@@ -140,8 +140,8 @@ function renderAudit(audit) {
   $('#annualSavings').textContent = money(audit.annualSavings);
   $('#credexFlag').textContent = audit.credexFit ? 'Yes' : 'No';
   $('#heroMonthly').textContent = money(audit.monthlySavings);
-  $('#heroAnnual').textContent = money(audit.annualSavings);
-  $('#heroTools').textContent = String(audit.results.length);
+  const annualBadge = document.getElementById('heroAnnualBadge');
+  if (annualBadge) annualBadge.textContent = money(audit.annualSavings) + ' / yr';
   $('#insightCards').innerHTML = [...audit.results]
     .sort((a, b) => b.savings - a.savings)
     .slice(0, 3)

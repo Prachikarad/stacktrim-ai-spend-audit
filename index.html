@@ -3,15 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StackTrim AI Spend Audit</title>
-    <meta
-      name="description"
-      content="A free AI spend audit for startup teams. Find plan waste, tool overlap, and Credex credit opportunities in minutes."
-    />
-    <meta property="og:title" content="StackTrim AI Spend Audit" />
-    <meta property="og:description" content="Find AI tool overspend and share a clean savings report." />
+    <title>StackTrim — AI Spend Audit</title>
+    <meta name="description" content="A free AI spend audit for startup teams. Find plan waste, tool overlap, and Credex credit opportunities in minutes." />
+    <meta property="og:title" content="StackTrim — AI Spend Audit" />
+    <meta property="og:description" content="Find out in 2 minutes what your AI stack is actually costing you." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body>
@@ -21,105 +20,125 @@
         <span>StackTrim</span>
       </a>
       <nav aria-label="Primary">
-        <a href="#audit">Audit</a>
+        <a href="#workspace">Audit</a>
         <a href="#report">Report</a>
         <a href="#sources">Sources</a>
       </nav>
+      <button id="navCta" type="button" class="nav-cta">Start free audit</button>
     </header>
 
     <main>
+      <!-- HERO -->
       <section class="hero" id="audit">
         <div class="hero-copy">
-          <p class="eyebrow">Credex-ready AI spend audit</p>
-          <h1>Find the AI spend your startup should not be paying.</h1>
-          <p>
-            StackTrim turns a messy stack of Cursor, Copilot, Claude, ChatGPT, Gemini, Windsurf,
-            and API bills into a finance-readable savings report in minutes.
+          <p class="eyebrow">Free AI spend audit</p>
+          <h1>Are you overpaying<br />for <em>AI tools?</em></h1>
+          <p class="hero-sub">
+            Enter your subscriptions and team size. Get an honest per-tool breakdown — and exactly what to do about it.
           </p>
           <div class="hero-actions">
-            <a class="button-link" href="#workspace">Start audit</a>
-            <button id="heroSample" class="ghost" type="button">Show sample report</button>
+            <a class="button-primary" href="#workspace">Start free audit</a>
+            <button id="heroSample" class="ghost" type="button">See a sample report →</button>
           </div>
           <div class="proof-strip" aria-label="Product proof points">
-            <span>No login</span>
+            <span>No account required</span>
             <span>Official pricing sources</span>
-            <span>Shareable redacted reports</span>
+            <span>Shareable report link</span>
           </div>
         </div>
-        <div class="hero-visual" aria-label="Audit highlights">
+
+        <div class="hero-visual" aria-label="Audit preview">
           <div class="audit-window">
             <div class="window-bar">
-              <span></span>
-              <span></span>
-              <span></span>
-              <strong>stacktrim.audit</strong>
+              <span class="dot dot-r"></span>
+              <span class="dot dot-y"></span>
+              <span class="dot dot-g"></span>
+              <strong>stacktrim.app/report/a8f2c</strong>
             </div>
             <div class="audit-window-body">
               <div class="hero-card-top">
                 <span class="live-dot" aria-hidden="true"></span>
                 <span>Live audit preview</span>
               </div>
-              <div class="savings-ring">
-                <span id="heroMonthly">$0</span>
-                <small>monthly savings found</small>
+              <div class="savings-hero-row">
+                <div>
+                  <div class="savings-big" id="heroMonthly">$0</div>
+                  <div class="savings-label">potential monthly savings</div>
+                </div>
+                <div class="savings-annual-badge" id="heroAnnualBadge">$0 / yr</div>
               </div>
-              <div class="hero-stat-row">
-                <div>
-                  <span id="heroAnnual">$0</span>
-                  <small>annualized</small>
+              <div class="preview-tool-rows">
+                <div class="preview-tool-row">
+                  <div>
+                    <div class="preview-tool-name">Cursor Business</div>
+                    <div class="preview-tool-action">Downgrade — 8 seats underutilized</div>
+                  </div>
+                  <div class="preview-save green">−$320</div>
                 </div>
-                <div>
-                  <span id="heroTools">0</span>
-                  <small>tools checked</small>
+                <div class="preview-tool-row">
+                  <div>
+                    <div class="preview-tool-name">ChatGPT Team</div>
+                    <div class="preview-tool-action">Switch to Claude Pro</div>
+                  </div>
+                  <div class="preview-save blue">−$180</div>
+                </div>
+                <div class="preview-tool-row">
+                  <div>
+                    <div class="preview-tool-name">GitHub Copilot Business</div>
+                    <div class="preview-tool-action">Already on right plan</div>
+                  </div>
+                  <div class="preview-save ok">✓ Optimal</div>
                 </div>
               </div>
-              <div class="spend-stack" aria-label="Detected spend stack">
+              <div class="credex-banner">
                 <div>
-                  <span>Cursor Teams</span>
-                  <strong>$160</strong>
+                  <strong>Credex can save you an extra 30–40%</strong>
+                  <span>Discounted AI credits from overforecast companies</span>
                 </div>
-                <div>
-                  <span>Copilot Business</span>
-                  <strong>$171</strong>
-                </div>
-                <div>
-                  <span>OpenAI API</span>
-                  <strong>$1.2k</strong>
-                </div>
+                <button class="banner-btn" type="button">Book a call</button>
               </div>
             </div>
           </div>
-          <div class="floating-note top">
-            <span>Duplicate seats</span>
-            <strong>-35%</strong>
-          </div>
-          <div class="floating-note bottom">
-            <span>Credit opportunity</span>
-            <strong>Credex fit</strong>
-          </div>
         </div>
       </section>
 
-      <section class="signal-strip" aria-label="Audit signal examples">
+      <!-- TOOLS STRIP -->
+      <div class="tools-strip">
+        <span class="tools-strip-label">Tools we audit</span>
+        <div class="tools-list">
+          <span class="tool-pill">Cursor</span>
+          <span class="tool-pill">GitHub Copilot</span>
+          <span class="tool-pill">Claude</span>
+          <span class="tool-pill">ChatGPT</span>
+          <span class="tool-pill">Anthropic API</span>
+          <span class="tool-pill">OpenAI API</span>
+          <span class="tool-pill">Gemini</span>
+          <span class="tool-pill">Windsurf</span>
+        </div>
+      </div>
+
+      <!-- SIGNAL STRIP -->
+      <section class="signal-strip" aria-label="What we check">
         <div>
           <strong>Plan fit</strong>
-          <span>Small team on enterprise-style pricing? Flagged with math.</span>
+          <span>Small team on enterprise pricing? Flagged with math a CFO would agree with.</span>
         </div>
         <div>
           <strong>Tool overlap</strong>
-          <span>Multiple coding assistants on the same seats? Consolidation surfaced.</span>
+          <span>Multiple coding assistants on the same seats? Consolidation surfaced immediately.</span>
         </div>
         <div>
           <strong>Credit leverage</strong>
-          <span>High API spend becomes a Credex consultation opportunity.</span>
+          <span>High API spend? We surface the Credex consultation opportunity at the right moment.</span>
         </div>
       </section>
 
+      <!-- WORKSPACE -->
       <section class="workspace" id="workspace" aria-label="Audit workspace">
         <aside class="panel controls" aria-label="Company inputs">
           <p class="eyebrow">Step 01</p>
           <h2>Company context</h2>
-          <p class="panel-copy">Enough context to judge plan fit without asking for private billing access.</p>
+          <p class="panel-copy">Enough to judge plan fit — no billing access needed.</p>
           <label>
             Company name
             <input id="companyName" autocomplete="organization" placeholder="Acme Labs" />
@@ -140,7 +159,7 @@
               </select>
             </label>
           </div>
-          <button id="addTool" class="secondary" type="button">Add another tool</button>
+          <button id="addTool" class="secondary" type="button">+ Add another tool</button>
           <button id="runAudit" type="button">Run audit</button>
         </aside>
 
@@ -157,11 +176,12 @@
         </section>
       </section>
 
+      <!-- REPORT -->
       <section class="report" id="report" aria-live="polite">
         <div class="section-heading">
           <div>
             <p class="eyebrow">Board-ready output</p>
-            <h2>Your AI spend memo</h2>
+            <h2>Your audit results</h2>
           </div>
           <div class="report-actions">
             <button id="shareReport" class="secondary" type="button">Copy report link</button>
@@ -170,7 +190,7 @@
         </div>
 
         <div class="summary-grid">
-          <div class="metric">
+          <div class="metric accent-metric">
             <span id="monthlySavings">$0</span>
             <small>Potential monthly savings</small>
           </div>
@@ -185,8 +205,7 @@
         </div>
 
         <p id="aiSummary" class="ai-summary">
-          Run an audit to generate a personalized summary. If the AI service is unavailable, this
-          will use a deterministic fallback.
+          Run an audit to generate a personalized summary. If the AI service is unavailable, a deterministic fallback is used.
         </p>
 
         <div id="insightCards" class="insight-cards" aria-label="Top audit insights"></div>
@@ -207,9 +226,9 @@
         </div>
 
         <form id="leadForm" class="lead-form">
-          <div>
+          <div class="lead-form-heading">
             <p class="eyebrow">Credex handoff</p>
-            <h3>Capture this report and unlock follow-up savings.</h3>
+            <h3>Save this report and unlock follow-up savings.</h3>
           </div>
           <label>
             Work email
@@ -224,23 +243,47 @@
         </form>
       </section>
 
+      <!-- SOURCES -->
       <section class="sources" id="sources">
         <div class="section-heading">
           <div>
             <p class="eyebrow">Pricing data</p>
-            <h2>Every number links back to an official source.</h2>
+            <h2>Every number links to an official source.</h2>
           </div>
-          <span id="pricingDate"></span>
+          <span id="pricingDate" class="pricing-date"></span>
         </div>
         <div id="sourceList" class="source-list"></div>
       </section>
     </main>
 
     <footer>
-      <span>Built for Credex WebDev 2026 Round 1.</span>
+      <span>StackTrim — built for Credex WebDev 2026.</span>
       <span>No login required. Public report links strip email and company name.</span>
     </footer>
 
     <script type="module" src="./src/main.js"></script>
+    <script>
+      // Nav CTA → scroll to workspace
+      document.getElementById('navCta').addEventListener('click', () => {
+        document.getElementById('workspace').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      // Hero "Start free audit" anchor → smooth scroll
+      document.querySelectorAll('a[href="#workspace"]').forEach(a => {
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          document.getElementById('workspace').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // Source list links — ensure they open in new tab (main.js renders them, so watch for DOM)
+      const observer = new MutationObserver(() => {
+        document.querySelectorAll('#sourceList a').forEach(a => {
+          a.setAttribute('target', '_blank');
+          a.setAttribute('rel', 'noreferrer noopener');
+        });
+      });
+      observer.observe(document.getElementById('sourceList'), { childList: true });
+    </script>
   </body>
 </html>
