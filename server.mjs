@@ -184,7 +184,8 @@ async function handleApi(req, res, pathname) {
 
 async function serveStatic(req, res, pathname) {
   const cleanPath = pathname === '/' ? '/index.html' : pathname;
-  const normalized = normalize(cleanPath).replace(/^(\.\.[/\\])+/, '');
+  // Remove leading slash to ensure relative path joining works on all platforms
+  let normalized = normalize(cleanPath).replace(/^(\.\.[/\\])+/, '').replace(/^[/\\]/, '');
   const filePath = join(root, normalized);
   if (!filePath.startsWith(root)) {
     res.writeHead(403);
