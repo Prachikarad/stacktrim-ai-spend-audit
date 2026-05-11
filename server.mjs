@@ -200,9 +200,15 @@ async function serveStatic(req, res, pathname) {
     });
     res.end(data);
   } catch {
-    const fallback = await readFile(join(root, 'index.html'));
-    res.writeHead(200, { 'Content-Type': contentTypes['.html'] });
-    res.end(fallback);
+    // Only serve index.html for HTML navigation routes (no file extension)
+    if (!extname(normalized)) {
+      const fallback = await readFile(join(root, 'index.html'));
+      res.writeHead(200, { 'Content-Type': contentTypes['.html'] });
+      res.end(fallback);
+    } else {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('Not found');
+    }
   }
 }
 
