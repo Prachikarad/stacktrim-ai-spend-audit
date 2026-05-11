@@ -7,7 +7,7 @@
 ---
 
 ## Live
-🔗 [stacktrim.vercel.app](https://stacktrim.vercel.app)
+🔗 https://stacktrim-ai-spend-audit-six.vercel.app/
 
 ## Key Features
 - **Spend audit engine** — Defensible logic: plan fit, duplicate tools, cheaper alternatives, credit opportunities
@@ -23,7 +23,7 @@
 
 ### Local Development
 ```bash
-git clone https://github.com/yourusername/stacktrim
+git clone https://github.com/Prachikarad/stacktrim
 cd stacktrim
 npm install
 
