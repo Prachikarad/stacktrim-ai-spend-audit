@@ -133,8 +133,9 @@ async function storeLeadInSupabase(lead) {
 }
 
 async function storeLeadLocally(lead) {
-  await mkdir(join(root, 'data'), { recursive: true });
-  const file = join(root, 'data', 'leads.json');
+  const storageRoot = process.env.VERCEL ? '/tmp' : join(root, 'data');
+  await mkdir(storageRoot, { recursive: true });
+  const file = join(storageRoot, 'leads.json');
   let leads = [];
   try {
     leads = JSON.parse(await readFile(file, 'utf8'));
