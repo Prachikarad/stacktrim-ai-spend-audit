@@ -1,3 +1,4 @@
+import './styles.css';
 import { auditSpend, fallbackSummary, money, publicReportPayload, TOOL_CATALOG } from './audit-engine.js';
 import { PRICING_AS_OF } from './pricing-data.js';
 import { decodeReport, encodeReport, loadDraft, saveDraft } from './storage.js';
